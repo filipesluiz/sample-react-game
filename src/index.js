@@ -48,7 +48,8 @@ class Game extends React.Component {
         squares: Array(9).fill(null)
       }],
       stepNumber: 0,
-      xIsNext: true
+      xIsNext: true,
+      colRow: null,
     };
   }
 
@@ -66,9 +67,11 @@ class Game extends React.Component {
         squares:squares
       }]),
       stepNumber: history.length,
-      xIsNext: !this.state.xIsNext
+      xIsNext: !this.state.xIsNext,
+      colRow: calculateColRow(i) // &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
     });
   }
+  
 
   jumpTo(step){
     this.setState({
@@ -105,6 +108,7 @@ class Game extends React.Component {
         </div>
         <div className="game-info">
           <div>{status}</div>
+          <div>{this.state.colRow}</div> {/*&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&*/}
           <ol>{moves}</ol>
         </div>
       </div>
@@ -130,6 +134,13 @@ function calculateWinner(squares) {
     }
   }
   return null;
+}
+
+// &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+function calculateColRow(i){
+  let col = i % 3 + 1;
+  let row = parseInt(i / 3) + 1;
+  return `Col = ${col} and Row = ${row}`;
 }
 
 // ========================================
