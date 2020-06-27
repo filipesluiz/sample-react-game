@@ -51,6 +51,7 @@ class Game extends React.Component {
       stepNumber: 0,
       xIsNext: true,
       colRow: null,
+      orderDesc:false
     };
   }
 
@@ -87,14 +88,16 @@ class Game extends React.Component {
     const winner = calculateWinner(current.squares);
 
     const moves = history.map((obj, index) => {
-      const desc = index ? 'Go to move #' + index : 'Go to move start';
-      const active = this.state.stepNumber === index;
+      // &&&&& task = 4 
+      let orderIndex = this.state.orderDesc ? history.length - 1 - index : index;
+      const desc = orderIndex ? 'Go to move #' + orderIndex : 'Go to move start';
+      const active = this.state.stepNumber === orderIndex;
       return (
         <li key={index}>
           <button 
             //&&&&&&&&&&&&&&&&&&&&
             style={{fontWeight: active ? 'bold': '', backgroundColor: active ? 'lightblue': ''}} 
-            onClick={() => this.jumpTo(index)}>{desc}
+            onClick={() => this.jumpTo(orderIndex)}>{desc}
           </button>
         </li>
       );
@@ -115,6 +118,12 @@ class Game extends React.Component {
         <div className="game-info">
           <div>{status}</div>
           <div>{this.state.colRow}</div> {/*&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&*/}
+          {/* &&&&& task = 4*/}
+          <ol>
+             <button onClick={() => this.setState({orderDesc: !this.state.orderDesc})}>
+               Order by: {this.state.orderDesc ? 'DESC' : 'ASC'} 
+               </button> 
+          </ol>
           <ol>{moves}</ol>
         </div>
       </div>
