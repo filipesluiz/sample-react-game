@@ -1,3 +1,6 @@
+## React Tutorial and The code I made for the list of tutorial improvement ideas
+Below, the original README created by React
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
